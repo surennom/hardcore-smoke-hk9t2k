@@ -1,0 +1,39 @@
+[
+  {
+    "region": "National Capital Region (NCR)",
+    "cities": [
+      "Manila",
+      "Quezon City",
+      "Makati",
+      "Taguig",
+      "Pasig",
+      "Muntinlupa",
+      "Paranaque",
+      "Caloocan",
+      "Mandaluyong",
+      "San Juan"
+    ]
+  },
+  {
+    "region": "CALABARZON",
+    "cities": [
+      "Antipolo",
+      "Bacoor",
+      "Calamba",
+      "Dasmariñas",
+      "San Pedro",
+      "Santa Rosa"
+    ]
+  },
+  {
+    "region": "Central Luzon",
+    "cities": ["Angeles City", "San Fernando", "Olongapo", "Tarlac City"]
+  },
+  {
+    "region": "Central Visayas",
+    "cities": ["Cebu City", "Lapu-Lapu City", "Mandaue City", "Dumaguete"]
+  },
+  { "region": "Western Visayas", "cities": ["Bacolod", "Iloilo City"] },
+  { "region": "Davao Region", "cities": ["Davao City"] },
+  { "region": "Northern Mindanao", "cities": ["Cagayan de Oro", "Iligan"] }
+]

@@ -1,0 +1,954 @@
+/* ==========================================================================
+   total.css  —  unified theme & utilities (no duplicates)
+   ========================================================================== */
+
+/* =========
+   Design Tokens
+   ========= */
+:root {
+  --bg: #0b0f14;
+  --bg-elev: #121821;
+  --panel: #151c26;
+  --text: #e9eef5;
+  --muted: #9fb0c6;
+  --primary: #4aa8ff;
+  --primary-weak: rgba(74, 168, 255, 0.15);
+  --danger: #ff6b6b;
+  --success: #2ecc71;
+  --warning: #f8c146;
+
+  --border: #1f2933;
+
+  --radius-lg: 16px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+
+  --shadow-1: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow-2: 0 12px 30px rgba(0, 0, 0, 0.45);
+
+  --spacing-1: 8px;
+  --spacing-2: 12px;
+  --spacing-3: 16px;
+  --spacing-4: 20px;
+  --spacing-5: 24px;
+  --spacing-6: 32px;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+
+  --avatar-sm-min: 40px;
+  --avatar-sm-max: 64px;
+  --avatar-lg-min: 96px;
+  --avatar-lg-max: 160px;
+
+  --icon-min: 28px;
+  --icon-max: 40px;
+
+  --title-max-min: 120px;
+  --title-max-max: 320px;
+}
+
+/* =========
+     Global Reset
+     ========= */
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+#root {
+  height: 100%;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(
+      1200px 800px at 10% 5%,
+      #0e141d 0%,
+      #0b0f14 40%,
+      #090c10 100%
+    )
+    fixed;
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* Scrollbar (WebKit) */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+*::-webkit-scrollbar-thumb {
+  background: #243041;
+  border-radius: 10px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* =========
+     Layout
+     ========= */
+.app-root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.app-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 68px;
+} /* space for bottom nav */
+.page {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: var(--spacing-6) var(--spacing-4);
+  width: 100%;
+}
+
+.card {
+  background: linear-gradient(180deg, var(--panel), #101722 70%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+  padding: var(--spacing-5);
+}
+
+/* =========
+     Typography
+     ========= */
+h1,
+h2,
+h3 {
+  margin: 0 0 var(--spacing-3);
+  letter-spacing: 0.2px;
+}
+h1 {
+  font-size: clamp(22px, 3.2vw, 28px);
+  font-weight: 800;
+}
+h2 {
+  font-size: clamp(18px, 2.6vw, 22px);
+  font-weight: 700;
+  color: var(--muted);
+}
+h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--muted);
+}
+p {
+  margin: 0 0 var(--spacing-2);
+  color: #d6dee9;
+  line-height: 1.55;
+}
+.muted {
+  color: var(--muted);
+}
+
+/* =========
+     Buttons
+     ========= */
+button,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, #1b2431 0%, #141b24 100%);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.2s ease, background 0.2s ease,
+    border-color 0.2s ease;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+}
+button:hover,
+.btn:hover {
+  transform: translateY(-1px);
+  border-color: #2a3a50;
+}
+button:active,
+.btn:active {
+  transform: translateY(0px) scale(0.98);
+}
+
+.btn--primary {
+  background: linear-gradient(180deg, #2a84ff 0%, #1d5fe0 100%);
+  border-color: #3276ff;
+  box-shadow: 0 10px 22px rgba(50, 118, 255, 0.35);
+}
+.btn--primary:hover {
+  filter: brightness(1.05);
+}
+.btn--danger {
+  background: linear-gradient(180deg, #ff6b83 0%, #ff415d 100%);
+  border-color: #ff506b;
+  box-shadow: 0 10px 22px rgba(255, 96, 122, 0.35);
+}
+.logout-button {
+  margin-top: var(--spacing-4);
+  width: 100%;
+}
+
+/* =========
+     Forms
+     ========= */
+.input,
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: #0f1620;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input::placeholder,
+textarea::placeholder {
+  color: #6f86a3;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2a3a50;
+  box-shadow: 0 0 0 4px rgba(74, 168, 255, 0.12);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-3);
+}
+.form-row--2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-3);
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  margin: 0 8px 8px 0;
+  border-radius: 999px;
+  background: var(--primary-weak);
+  color: var(--text);
+  border: 1px solid #264564;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+
+/* =========
+     Bottom Navigation
+     ========= */
+.bottom-nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  backdrop-filter: saturate(140%) blur(10px);
+  background: linear-gradient(
+    0deg,
+    rgba(7, 10, 14, 0.85),
+    rgba(7, 10, 14, 0.6)
+  );
+  border-top: 1px solid var(--border);
+  padding: 10px env(safe-area-inset-right) 10px env(safe-area-inset-left);
+}
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 6px;
+  color: var(--muted);
+  font-size: 12px;
+  transition: color 0.2s ease, transform 0.08s ease;
+}
+.nav-item svg {
+  font-size: 18px;
+}
+.nav-item:active {
+  transform: translateY(1px);
+}
+.nav-item:hover {
+  color: var(--text);
+}
+
+/* =========
+     Loading
+     ========= */
+.loading-container {
+  display: grid;
+  place-items: center;
+  min-height: 40vh;
+  color: var(--muted);
+  font-size: 15px;
+}
+.loading-spinner {
+  display: grid;
+  place-items: center;
+  gap: 10px;
+  padding: 24px;
+}
+.loading-spinner__circle {
+  width: 36px;
+  height: 36px;
+  border: 3px solid #223043;
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+.loading-spinner__text {
+  color: var(--muted);
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.loading-fallback {
+  padding: var(--spacing-4);
+  text-align: center;
+  color: var(--muted);
+}
+
+/* =========
+     Lists / Items
+     ========= */
+.list {
+  display: grid;
+  gap: var(--spacing-3);
+}
+.list-item {
+  background: linear-gradient(180deg, #121a25, #0f1721 70%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-4);
+  display: grid;
+  gap: 8px;
+  transition: transform 0.08s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.list-item:hover {
+  transform: translateY(-1px);
+  border-color: #2a3a50;
+  box-shadow: var(--shadow-1);
+}
+.list-row {
+  padding: 6px 0;
+} /* react-window row wrapper */
+.loading-row .list-item .muted {
+  opacity: 0.85;
+}
+
+/* =========
+     Meeting / Profile specific
+     ========= */
+.meeting-toolbar {
+  /* extra toolbar container (spacing via utilities) */
+}
+.ribbon {
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  font-size: 12px;
+}
+
+.profile-header {
+  display: grid;
+  gap: var(--spacing-4);
+  background: linear-gradient(180deg, #131b27, #0f1620 70%);
+  border: 1px solid var(--border);
+  padding: var(--spacing-5);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-1);
+}
+.profile-card {
+  margin-top: var(--spacing-3);
+}
+
+.profile-image-section {
+  display: flex;
+  justify-content: center;
+}
+.profile-image-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid #244058;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  background: #0d141d;
+}
+.profile-preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.profile-placeholder-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--muted);
+  background: #0f1620;
+  border: 1px dashed #274058;
+}
+
+.cta {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* Interest / Modal (ProfileEdit) */
+.interest-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.category-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.interest-tag-button {
+  padding: 8px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #0f1620;
+  color: var(--text);
+  cursor: pointer;
+}
+.interest-tag-button.selected {
+  background: var(--primary-weak);
+  border-color: #264564;
+}
+
+.save-button {
+  margin-top: var(--spacing-3);
+  width: 100%;
+}
+.add-interest-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #0f1620;
+  color: var(--text);
+}
+
+/* Modal (공용) */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.72);
+  animation: fadeIn 0.18s ease;
+}
+.modal {
+  width: min(92vw, 680px);
+  max-height: 86vh;
+  overflow: auto;
+  background: linear-gradient(180deg, var(--panel), #101722 70%);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-2);
+  padding: var(--spacing-5);
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-3);
+}
+.modal-content {
+  display: grid;
+  gap: var(--spacing-3);
+}
+.modal-close-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(20, 28, 38, 0.8);
+  border: 1px solid #2a3a50;
+  color: #dbe8fb;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 0.08s ease, filter 0.2s ease;
+}
+.modal-close-button:hover {
+  filter: brightness(1.1);
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========
+     Skeleton
+     ========= */
+.skeleton-list {
+  overflow: hidden;
+}
+.skeleton-row {
+  height: var(--row-h, 60px);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+}
+.row-60 {
+  --row-h: 60px;
+}
+.row-84 {
+  --row-h: 84px;
+}
+
+.skeleton {
+  position: relative;
+  border-radius: 8px;
+  height: 12px;
+  background: linear-gradient(90deg, #0f1620 25%, #172131 37%, #0f1620 63%);
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.2s ease-in-out infinite;
+  border: 1px solid var(--border);
+}
+.skeleton--w30 {
+  width: 30%;
+}
+.skeleton--w60 {
+  width: 60%;
+}
+.skeleton--button {
+  width: 88px;
+  height: 32px;
+  border-radius: var(--radius-md);
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* =========
+     ErrorBoundary
+     ========= */
+.error-box {
+  padding: var(--spacing-4);
+  color: var(--danger);
+}
+.error-pre {
+  white-space: pre-wrap;
+}
+.error-details summary {
+  cursor: pointer;
+}
+.error-note {
+  margin-top: var(--spacing-2);
+}
+
+/* =========
+     Utilities
+     ========= */
+.grid {
+  display: grid;
+}
+.flex {
+  display: flex;
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+
+.gap-2 {
+  gap: 8px;
+}
+.gap-3 {
+  gap: 12px;
+}
+
+.p-2 {
+  padding: 8px;
+}
+.p-3 {
+  padding: 12px;
+}
+
+.mt-2 {
+  margin-top: var(--spacing-2);
+} /* 12px */
+.mt-3 {
+  margin-top: var(--spacing-3);
+} /* 16px */
+
+.h-420 {
+  height: 420px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Avatars */
+.avatar-40 {
+  width: 40px;
+  height: 40px;
+}
+
+/* === cover gradient thumbnails === */
+.cover-thumb {
+  width: 72px;
+  height: 48px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.cover-thumb img,
+.cover-thumb-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cover-thumb-large {
+  width: 160px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* 5가지 기본 그라디언트 */
+.cover-g1 {
+  background: linear-gradient(135deg, #9be7ff, #7a7dff);
+}
+.cover-g2 {
+  background: linear-gradient(135deg, #ffd29b, #ff7aa2);
+}
+.cover-g3 {
+  background: linear-gradient(135deg, #a18cd1, #fbc2eb);
+}
+.cover-g4 {
+  background: linear-gradient(135deg, #ff9966, #ff5e62);
+}
+.cover-g5 {
+  background: linear-gradient(135deg, #56ccf2, #2f80ed);
+}
+
+/* === meeting profile thumbnails (원형/정사각형) === */
+
+/* 제목 영역: 길면 마키(슬라이드) */
+
+
+.title-marquee {
+  display: inline-block;
+  white-space: nowrap;
+  animation: title-slide 12s linear infinite;
+}
+
+@keyframes title-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* ===== Responsive sizing vars ===== */
+:root {
+  --avatar-sm-min: 40px;
+  --avatar-sm-max: 64px;
+  --avatar-lg-min: 96px;
+  --avatar-lg-max: 160px;
+
+  --icon-min: 28px;
+  --icon-max: 40px;
+
+  --title-max-min: 120px;
+  --title-max-max: 320px;
+}
+
+/* ===== Meeting hero (상단 묶음) ===== */
+.meeting-hero {
+  position: relative;
+  /* 배경 대비 강화: 파스텔 그라디언트 */
+  background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+}
+
+/* ===== Icon Button (responsive square) ===== */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(var(--icon-min), 908vw, var(--icon-max));
+  height: clamp(var(--icon-min), 8vw, var(--icon-max));
+  /* 아이콘 자체가 버튼 영역을 채우도록 폰트 크기 스케일 */
+  /* font-size: clamp(16px, 6vw, 22px);*/
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #f9fafb;
+  color: #333;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background: #e5f6f8;
+}
+
+/* react-icons SVG가 버튼 면적을 ‘시각적으로’ 꽉 채우도록 보정 */
+.icon-btn > svg {
+  width: 1em;
+  height: 1em;
+}
+
+/* ===== Meeting avatars ===== */
+.meeting-avatar {
+  width: clamp(var(--avatar-sm-min), 12vw, var(--avatar-sm-max));
+  height: clamp(var(--avatar-sm-min), 12vw, var(--avatar-sm-max));
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.meeting-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 상세/미리보기용 정사각형(라운드) */
+.meeting-avatar-large {
+  width: clamp(var(--avatar-lg-min), 35vw, var(--avatar-lg-max));
+  height: clamp(var(--avatar-lg-min), 35vw, var(--avatar-lg-max));
+  border-radius: 16px;
+  overflow: hidden;
+}
+.meeting-avatar-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 클릭 초점 표식 (크기도 반응형) */
+.focus-dot {
+  position: absolute;
+  width: clamp(6px, 1.8vw, 10px);
+  height: clamp(6px, 1.8vw, 10px);
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
+
+/* ===== Title (길면 슬라이드) ===== */
+.title-wrap {
+  max-width: clamp(var(--title-max-min), 40vw, var(--title-max-max));
+  overflow: hidden;
+}
+.title-static,
+.title-marquee .title-seq {
+  font-size: clamp(1rem, 2.8vw, 1.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #222; /* 더 진한 글자색 */
+  margin: 0; /* 여백 제거 */
+}
+.title-seq {
+  padding-right: 24px;
+}
+
+/* ===== Utilities ===== */
+.fill {
+  width: 100%;
+  height: 100%;
+}
+
+/* 기존 h-400를 반응형으로 재정의 */
+.h-400 {
+  height: clamp(240px, 50vh, 400px);
+  min-height: 240px;
+}
+
+/* === Meeting hero header layout === */
+.meeting-hero-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1rem;
+}
+
+.meeting-hero-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0; /* 제목이 넘치지 않게 */
+}
+
+.meeting-title-block {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.subtitle-my {
+  font-size: 0.8rem;
+  color: #1e88e5; /* 파란색 강조 (원하는 색상으로 조정 가능) */
+  margin-top: 2px;
+}
+
+/* 아이콘 영역은 고정폭 유지, 밖으로 안나가게 */
+.meeting-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* === Profile View Layout (안정적 영역 내 표시) === */
+.profile-card {
+  overflow: hidden;             /* 내부 컨텐츠가 밖으로 새지 않도록 */
+}
+
+.profile-header-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* 아바타 | 타이틀 | 액션 */
+  gap: 1rem;
+  align-items: center;
+}
+
+.profile-avatar {
+  width: clamp(56px, 12vw, 88px);
+  height: clamp(56px, 12vw, 88px);
+  border-radius: 50%;
+  overflow: hidden;
+  background: #eef2f7;
+  flex-shrink: 0;
+}
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-avatar-fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  color: #666;
+  font-size: 0.8rem;
+}
+
+.profile-title {
+  min-width: 0;                 /* 🔑 긴 텍스트가 그리드 밖으로 흐르지 않게 */
+}
+.profile-name {
+  font-weight: 700;
+  font-size: clamp(1rem, 2.6vw, 1.25rem);
+  line-height: 1.2;
+  color: #f5f5f5; /* 밝은 글씨 */
+  overflow: hidden;
+  text-overflow: ellipsis;       /* 한 줄 말줄임 */
+  white-space: nowrap;
+}
+.profile-email {
+  color: #ddd;                   /* 대비 향상 */
+  font-size: 0.9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.profile-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-shrink: 0;                /* 액션 영역이 줄며 바깥으로 밀리지 않게 */
+}
+
+.profile-info-grid {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2열 반응형 */
+  gap: 0.75rem 1rem;
+}
+.profile-info-item .label {
+  font-size: 0.85rem;
+  color: #bbb;
+  margin-bottom: 4px;
+}
+.profile-info-item .value {
+  color: #eee;
+  word-break: break-word;        /* 긴 값 줄바꿈 */
+}
+.profile-info-item .value.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.profile-info-span {
+  grid-column: 1 / -1;           /* 관심사는 가로로 넓게 */
+}
+
+/* 모바일에서 1열로 자동 감소 */
+@media (max-width: 520px) {
+  .profile-header-row {
+    grid-template-columns: auto 1fr; /* 아바타 | 타이틀, 액션은 아래로 */
+    grid-template-areas:
+      "avatar title"
+      "actions actions";
+  }
+  .profile-actions {
+    grid-column: 1 / -1;
+    justify-content: flex-end;
+  }
+  .profile-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
